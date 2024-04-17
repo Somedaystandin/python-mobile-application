@@ -1,0 +1,450 @@
+WindowManager:
+    CreateAccountWindow:
+    MainWindow:
+    LoginWindow:
+    DataWindow:
+    ProfileWindow:
+    MapWindow:
+    InfoWindow:
+
+<CreateAccountWindow>:
+    name: "create"
+
+    namee: namee
+    email: email
+    password: password
+
+    FloatLayout:
+        cols:1
+
+        FloatLayout:
+            size: root.width, root.height/2
+
+            Label:
+                text: "Create an Account"
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":1}
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8}
+                text: "Name: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8}
+                size_hint: 0.4, 0.12
+                id: namee
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8-0.13}
+                text: "Email: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8-0.13}
+                size_hint: 0.4, 0.12
+                id: email
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8-0.13*2}
+                text: "Password: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8-0.13*2}
+                size_hint: 0.4, 0.12
+                id: password
+                multiline: False
+                password: True
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+        Button:
+            pos_hint:{"x":0.3,"y":0.25}
+            size_hint: 0.4, 0.1
+            font_size: (root.width**2 + root.height**2) / 17**4
+            text: "Already have an Account? Log In"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.login()
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.6, 0.15
+            text: "Submit"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release:
+                root.manager.transition.direction = "left"
+                root.submit()
+
+
+<LoginWindow>:
+    name: "login"
+
+    email: email
+    password: password
+
+    FloatLayout:
+
+        Label:
+            text:"Email: "
+            font_size: (root.width**2 + root.height**2) / 13**4
+            pos_hint: {"x":0.1, "top":0.9}
+            size_hint: 0.35, 0.15
+
+        TextInput:
+            id: email
+            font_size: (root.width**2 + root.height**2) / 13**4
+            multiline: False
+            pos_hint: {"x": 0.45 , "top":0.9}
+            size_hint: 0.4, 0.15
+
+        Label:
+            text:"Password: "
+            font_size: (root.width**2 + root.height**2) / 13**4
+            pos_hint: {"x":0.1, "top":0.7}
+            size_hint: 0.35, 0.15
+
+        TextInput:
+            id: password
+            font_size: (root.width**2 + root.height**2) / 13**4
+            multiline: False
+            password: True
+            pos_hint: {"x": 0.45, "top":0.7}
+            size_hint: 0.4, 0.15
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.6, 0.2
+            font_size: (root.width**2 + root.height**2) / 13**4
+            text: "Login"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.loginBtn()
+
+        Button:
+            pos_hint:{"x":0.3,"y":0.3}
+            size_hint: 0.4, 0.1
+            font_size: (root.width**2 + root.height**2) / 17**4
+            text: "Don't have an Account? Create One"
+            on_release:
+                root.manager.transition.direction = "right"
+                root.createBtn()
+
+#:import hex kivy.utils.get_color_from_hex
+<MainWindow>:
+    name: "main"
+    FloatLayout:
+        Label:
+            text: "What is nuclear safety?"
+            pos_hint: {"x":0, "y": .25}
+            font_size: 25
+            outline_width: 1
+
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":.57, "top":0.1}
+            text: "This project was created by Artem Hostintsev"
+            font_size: '12sp'
+
+        Carousel:
+            direction: 'right'
+
+            Label:
+                text:
+                    '''
+                    Nuclear safety is defined by the International Atomic Energy Agency (IAEA) as "The achievement
+                    of proper operating conditions, prevention of accidents or mitigation of accident consequences,
+                    resulting in protection of workers, the public and the environment from undue radiation hazards".
+                    '''
+                font_size: 17
+                color: 1, 1, 0, 1
+                outline_width: 2
+                font_name: "Comic"
+                canvas:
+                    Color:
+                        rgba: hex('#009688')
+                        a: .4
+                    RoundedRectangle:
+                        pos: self.center_x - self.width/2, self.center_x - self.height/3.5
+                        size: self.width, self.height/4
+                        radius: [(40, 40), (40, 40), (40, 40), (40, 40)]
+            Label:
+                text:
+                    '''
+                    The IAEA defines nuclear security as "The prevention and detection of and response to, theft,
+                    sabotage, unauthorized access, illegal transfer or other malicious acts involving nuclear
+                    materials, other radioactive substances or their associated facilities".
+                    '''
+                font_size: 17
+                color: 1, 1, 0, 1
+                outline_width: 2
+                font_name: "Comic"
+                canvas:
+                    Color:
+                        rgba: hex('#009688')
+                        a: .4
+                    RoundedRectangle:
+                        #pos_hint: {"x":0, "top": .25}
+                        pos: self.center_x - self.width/2, self.center_x - self.height/3.5
+                        size: self.width, self.height/4
+                        radius: [(40, 40), (40, 40), (40, 40), (40, 40)]
+            Label:
+                text:
+                    '''
+                    This covers nuclear power plants and all other nuclear facilities, the transportation of
+                    nuclear materials, and the use and storage of nuclear materials for medical, power,
+                    industry, and military uses.
+                    '''
+                font_size: 17
+                color: 1, 1, 0, 1
+                outline_width: 2
+                font_name: "Comic"
+                canvas:
+                    Color:
+                        rgba: hex('#009688')
+                        a: .4
+                    RoundedRectangle:
+                        pos: self.center_x - self.width/2, self.center_x - self.height/3.5
+                        size: self.width, self.height/4
+                        radius: [(40, 40), (40, 40), (40, 40), (40, 40)]
+
+    NavigationLayout:
+        ScreenManager:
+            Screen:
+                BoxLayout:
+                    orientation: 'vertical'
+                    MDToolbar:
+                        title: 'Main'
+                        left_action_items: [["menu", lambda x: nav_drawer.set_state()]]
+                        elevation: 10
+                    Widget:
+
+        MDNavigationDrawer:
+            id: nav_drawer
+            BoxLayout:
+                spacing: '8dp'
+                padding: '8dp'
+                orientation: 'vertical'
+
+                ScrollView:
+                    MDList:
+                        OneLineIconListItem:
+                            text: "Profile"
+                            on_release:
+                                root.manager.transition.direction = "left"
+                                root.btn2()
+                            IconLeftWidget:
+                                icon: 'account'
+
+                        OneLineIconListItem:
+                            text: "Check data"
+                            on_release:
+                                root.manager.transition.direction = "left"
+                                root.btn1()
+                            IconLeftWidget:
+                                icon: 'nuke'
+
+                        OneLineIconListItem:
+                            text: "Logout"
+                            on_release:
+                                root.manager.transition.direction = "right"
+                                root.btn()
+                            IconLeftWidget:
+                                icon: 'logout'
+
+<ProfileWindow>:
+    name: "profile"
+
+    n: n
+    email: email
+    created: created
+
+    NavigationLayout:
+        ScreenManager:
+            Screen:
+                BoxLayout:
+                    orientation: 'vertical'
+                    MDToolbar:
+                        title: "Profile"
+                        use_overflow: True
+                        left_action_items: [["arrow-left", lambda x: root.logout()]]
+
+                    Widget:
+
+    FloatLayout:
+
+        Label:
+            id: n
+            pos_hint:{"x": 0.1, "top":0.8}
+            size_hint:0.8, 0.2
+            text: "Account Name: "
+
+        Label:
+            id: email
+            pos_hint:{"x": 0.1, "top":0.6}
+            size_hint:0.8, 0.2
+            text: "Email: "
+
+        Label:
+            id: created
+            pos_hint:{"x": 0.1, "top":0.4}
+            size_hint:0.8, 0.2
+            text: "Created : "
+
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":.57, "top":0.1}
+            text: "This project was created by Artem Hostintsev"
+            #color: 1,0,0,1
+            font_size: '12sp'
+
+
+<Data@Label>:
+    size_hint_y: None
+    text_size: self.width, None
+    height: self.texture_size[1]
+    halign: 'left'
+    valign: 'middle'
+
+<DataWindow>:
+    name: "data"
+
+    BoxLayout:
+        orientation: 'vertical'
+        MDToolbar:
+            title: 'Data'
+            use_overflow: True
+            left_action_items: [["arrow-left", lambda x: root.homebtn()]]
+
+        RecycleView:
+            id: rv
+            viewclass: 'Data'
+
+            RecycleBoxLayout:
+                default_size_hint: 1, None
+                orientation: 'vertical'
+
+        MDBottomNavigation:
+
+            MDBottomNavigationItem:
+                name: 'screen 1'
+                text: 'Data'
+                icon: 'database'
+                on_tab_release:
+                    root.showbtn()
+
+            MDBottomNavigationItem:
+                name: 'screen 2'
+                text: 'Map'
+                icon: 'map'
+                on_tab_release:
+                    root.mapbtn()
+
+            MDBottomNavigationItem:
+                name: 'screen 3'
+                text: 'Info'
+                icon: 'information'
+                on_tab_release:
+                    root.infobtn()
+
+    #BoxLayout:
+    #    MDFloatingActionButtonSpeedDial:
+    #        data: root.data
+    #        hint_animation: True
+
+
+    #Image:
+    #    source: 'nuclear.png'
+    #    size_hint: .3, .4
+    #    pos_hint: { "center_x": .5, "center_y": .5 }
+            #on_release:
+            #    root.show_btn()
+
+        #Button:
+        #    text: "Click me!"
+        #    size_hint: 0.2, 0.1
+        #    pos_hint: {'center_x':.88, 'center_y':.8}
+
+<MapWindow>:
+    name: "map"
+    BoxLayout:
+        orientation: 'vertical'
+        MDToolbar:
+            title: "Map"
+            use_overflow: True
+            left_action_items: [["arrow-left", lambda x: root.logout()]]
+
+        Widget:
+
+        Label:
+            size_hint: 0.5,0.12
+            pos_hint: {"x":.57, "top":0.1}
+            text: "This project was created by Artem Hostintsev"
+            font_size: '12sp'
+
+<InfoWindow>:
+    name: "info"
+    BoxLayout:
+        orientation: 'vertical'
+        MDToolbar:
+            title: "About the program"
+            use_overflow: True
+            left_action_items: [["arrow-left", lambda x: root.logout()]]
+
+        Widget:
+
+    FloatLayout:
+        cols:1
+
+        FloatLayout:
+            size: root.width, root.height/2
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":.57, "top":0.1}
+                text: "This project was created by Artem Hostintsev"
+                #color: 1,0,0,1
+                font_size: '12sp'
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0.25, "top":0.66}
+                text:
+                    '''
+                    The measurement results presented by the application come only from the
+                    website where there is information about radioactive contamination.
+                    Results are subject to verification and may change.
+                    Data is presented in local time.
+                    '''
+                font_size: '20sp'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
